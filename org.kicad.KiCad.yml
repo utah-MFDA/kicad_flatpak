@@ -9,7 +9,7 @@ finish-args:
   - --share=ipc
   - --share=network
   - --socket=x11
-
+  - --filesystem=host
 add-extensions:
   org.kicad.KiCad.Library:
     version: stable
@@ -162,6 +162,7 @@ modules:
       - /include
       - /share/man
     config-opts:
+      - --enable-osdi
       - --disable-silent-rules
       - --enable-xspice
       - --enable-cider
@@ -342,3 +343,4 @@ modules:
           - exec /app/bin/pcbnew "$@"
 
   - kicad-doc.yml
+  - python3-opendbpy.yml

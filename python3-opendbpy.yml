@@ -1,0 +1,23 @@
+name: python3-opendbpy
+buildsystem: simple
+build-commands: []
+modules:
+  - name: python3-opendb
+    buildsystem: cmake
+    sources:
+      - type: git
+        url: https://github.com/utah-MFDA/OpenDb_standalone.git
+        commit: main
+  - name: python3-kiutils
+    buildsystem: simple
+    build-commands:
+      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+        --prefix=${FLATPAK_DEST} kiutils --no-build-isolation
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/8c/c0/381ece43b464ce8aff02a327b0d5cdc011b8c0d9a652e245b05e0bb0810a/kiutils-1.4.8-py3-none-any.whl
+        sha256: ca7c5c7eafb7bc33daa3d6cfe42cc704be2bcd2206103b28ad2682d88a6072ae
+        x-checker-data:
+          name: cmake_build_extension
+          packagetype: bdist_wheel
+          type: pypi
