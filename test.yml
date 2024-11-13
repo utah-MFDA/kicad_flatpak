@@ -1,0 +1,64 @@
+app-id: org.kicad.KiCadTest
+runtime: org.kde.Platform
+runtime-version: 5.15-23.08
+sdk: org.kde.Sdk
+command: kicad-startup
+finish-args:
+  - --device=dri
+  - --env=SPNAV_SOCKET=/run/spnav.sock
+  - --filesystem=home
+  - --filesystem=host
+  - --filesystem=/run/spnav.sock:ro
+  - --share=ipc
+  - --share=network
+  - --socket=pulseaudio
+  - --socket=wayland
+  - --socket=x11
+cleanup:
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /lib/wx
+  - /lib64
+  - /share/aclocal
+  - /share/bakefile
+  - '*.la'
+  - '*.a'
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
+  - '*.a'
+
+modules:
+  - name: swig
+    buildsystem: autotools
+    cleanup:
+      - /bin
+      - /share
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/swig/files/swig/swig-4.2.1/swig-4.2.1.tar.gz
+        sha256: fa045354e2d048b2cddc69579e4256245d4676894858fcf0bab2290ecf59b7d8
+        x-checker-data:
+          type: html
+          url: https://www.swig.org/download.html
+          version-pattern: The latest release is <a href=".+">swig-([\d\.]+)</a>
+          url-template: https://sourceforge.net/projects/swig/files/swig/swig-$version/swig-$version.tar.gz
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=/app --with-libraries=context,date_time,filesystem,iostreams,locale,program_options,regex,system,thread,test
+      - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
+    cleanup:
+      - /include
+    sources:
+      - type: archive
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.85.0/source/boost_1_85_0.tar.gz
+        sha256: be0d91732d5b0cc6fbb275c7939974457e79b54d6f07ce2e3dfdd68bef883b0b
+        x-checker-data:
+          type: html
+          url: https://www.boost.org/users/download/
+          version-pattern: Version (\d+\.?\d+\.\d+)(?!\sbeta)|</a>$
+          url-template: https://boostorg.jfrog.io/artifactory/main/release/$version/source/boost_${version0}_${version1}_${version2}.tar.gz
+
+  - python3-opendbpy.yml

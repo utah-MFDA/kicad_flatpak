@@ -1,0 +1,49 @@
+name: tcl
+modules:
+  - name: tclcore
+    buildsystem: autotools
+    subdir: unix
+    build-options:
+      no-debuginfo: true
+    post-install:
+      - ln -s ${FLATPAK_DEST}/bin/tclsh8.6  ${FLATPAK_DEST}/bin/tclsh
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/sourceforge/tcl/tcl8.6.15-src.tar.gz
+        sha256: 861e159753f2e2fbd6ec1484103715b0be56be3357522b858d3cbb5f893ffef1
+        x-checker-data:
+          type: anitya
+          project-id: 4941
+          url-template: https://downloads.sourceforge.net/sourceforge/tcl/tcl$version-src.tar.gz
+          stable-only: true
+          versions:
+            - <=: 9.0.0
+  - name: tk
+    buildsystem: autotools
+    subdir: unix
+    build-options:
+      no-debuginfo: true
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/sourceforge/tcl/tk8.6.15-src.tar.gz
+        sha256: 550969f35379f952b3020f3ab7b9dd5bfd11c1ef7c9b7c6a75f5c49aca793fec
+        x-checker-data:
+          type: anitya
+          project-id: 11426
+          url-template: https://downloads.sourceforge.net/sourceforge/tcl/tk$version-src.tar.gz
+          stable-only: true
+          versions:
+            - <=: 9.0.0
+    post-install:
+      - ln -s /app/bin/wish8.6 /app/bin/wish
+  - name: tclreadline
+    buildsystem: simple
+    build-commands:
+      - find /app -name tkConfig.sh
+      - ./configure --with-tcl=/app/lib
+      - make
+      - make install
+    sources:
+      - type: archive
+        url: https://github.com/flightaware/tclreadline/archive/refs/tags/v2.3.8.tar.gz
+        sha256: a64e0faed5957b8e1ac16f179948e21cdd6d3b8313590b7ab049a3192ab864fb

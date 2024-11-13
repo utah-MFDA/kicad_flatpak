@@ -1,0 +1,15 @@
+name: spdlog
+buildsystem: cmake-ninja
+config-opts:
+  - "-DSPDLOG_BUILD_EXAMPLE=OFF"
+  - "-DSPDLOG_BUILD_TESTS=OFF"
+  - "-DSPDLOG_BUILD_BENCH=OFF"
+  - "-DSPDLOG_INSTALL=ON"
+  - "-DSPDLOG_FMT_EXTERNAL=ON"
+cleanup:
+  - /include
+  - "*.a"
+sources:
+  - type: archive
+    url: "https://github.com/gabime/spdlog/archive/refs/tags/v1.14.1.tar.gz"
+    sha512: d8f36a3d65a43d8c64900e46137827aadb05559948b2f5a389bea16ed1bfac07d113ee11cf47970913298d6c37400355fe6895cda8fa6dcf6abd9da0d8f199e9

@@ -1,0 +1,14 @@
+name: swig
+buildsystem: autotools
+cleanup:
+  - /bin
+  - /share
+sources:
+  - type: archive
+    url: https://sourceforge.net/projects/swig/files/swig/swig-4.1.0/swig-4.1.0.tar.gz
+    sha256: d6a9a8094e78f7cfb6f80a73cc271e1fe388c8638ed22668622c2c646df5bb3d
+    x-checker-data:
+      type: html
+      url: https://www.swig.org/download.html
+      version-pattern: The latest release is <a href=".+">swig-([\d\.]+)</a>
+      url-template: https://sourceforge.net/projects/swig/files/swig/swig-$version/swig-$version.tar.gz

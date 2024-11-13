@@ -1,0 +1,12 @@
+name: yosys
+sources:
+  - type: git
+    url: https://github.com/YosysHQ/yosys
+    tag: yosys-0.44
+buildsystem: simple
+build-options:
+  env:
+    PREFIX: /app
+build-commands:
+  - make -j ${FLATPAK_BUILDER_N_JOBS}
+  - make install

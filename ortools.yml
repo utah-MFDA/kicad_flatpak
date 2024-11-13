@@ -1,0 +1,251 @@
+name: ortools
+buildsystem: simple
+build-commands: []
+modules:
+  # - name: python3-absl-py
+  #   buildsystem: simple
+  #   build-commands:
+  #     - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+  #       --prefix=${FLATPAK_DEST} "absl-py>=2.0.0" --no-build-isolation
+  #   sources:
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/a2/ad/e0d3c824784ff121c03cc031f944bc7e139a8f1870ffd2845cc2dd76f6c4/absl_py-2.1.0-py3-none-any.whl
+  #       sha256: 526a04eadab8b4ee719ce68f204172ead1027549089702d99b9059f129ff1308
+  # - name: python3-meson-python
+  #   buildsystem: simple
+  #   build-commands:
+  #     - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+  #       --prefix=${FLATPAK_DEST} "meson-python" --no-build-isolation
+  #   sources:
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/91/c0/104cb6244c83fe6bc3886f144cc433db0c0c78efac5dc00e409a5a08c87d/meson_python-0.16.0-py3-none-any.whl
+  #       sha256: 842dc9f5dc29e55fc769ff1b6fe328412fe6c870220fc321060a1d2d395e69e8
+  #       x-checker-data:
+  #         name: meson_python
+  #         packagetype: bdist_wheel
+  #         type: pypi
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/08/aa/cc0199a5f0ad350994d660967a8efb233fe0416e4639146c089643407ce6/packaging-24.1-py3-none-any.whl
+  #       sha256: 5b8f2217dbdbd2f7f384c41c628544e6d52f2d0f53c6d0c3ea61aa5d1d7ff124
+  #       x-checker-data:
+  #         name: packaging
+  #         packagetype: bdist_wheel
+  #         type: pypi
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/aa/5f/bb5970d3d04173b46c9037109f7f05fc8904ff5be073ee49bb6ff00301bc/pyproject_metadata-0.8.0-py3-none-any.whl
+  #       sha256: ad858d448e1d3a1fb408ac5bac9ea7743e7a8bbb472f2693aaa334d2db42f526
+  #       x-checker-data:
+  #         name: pyproject_metadata
+  #         packagetype: bdist_wheel
+  #         type: pypi
+  #   cleanup:
+  #     - /bin
+  #     - /share/man/man1
+  # - name: python3-numpy
+  #   buildsystem: simple
+  #   build-commands:
+  #     - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+  #       --prefix=${FLATPAK_DEST} numpy --no-build-isolation
+  #   sources:
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/65/6e/09db70a523a96d25e115e71cc56a6f9031e7b8cd166c1ac8438307c14058/numpy-1.26.4.tar.gz
+  #       sha256: 2a02aba9ed12e4ac4eb3ea9421c420301a0c6460d9830d74a9df87efa4912010
+  #       x-checker-data:
+  #         type: pypi
+  #         name: numpy
+
+  # - name: python3-pandas
+  #   buildsystem: simple
+  #   build-commands:
+  #     - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+  #       --prefix=${FLATPAK_DEST} "pandas>=2.0.0" --no-build-isolation
+  #   sources:
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/9c/d6/9f8431bacc2e19dca897724cd097b1bb224a6ad5433784a44b587c7c13af/pandas-2.2.3.tar.gz
+  #       sha256: 4f18ba62b61d7e192368b84517265a99b4d7ee8912f8708660fb4a366cc82667
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/ec/57/56b9bcc3c9c6a792fcbaf139543cee77261f3651ca9da0c93f5c1221264b/python_dateutil-2.9.0.post0-py2.py3-none-any.whl
+  #       sha256: a8b2bc7bffae282281c8140a97d3aa9c14da0b136dfe83f850eea9a5f7470427
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/11/c3/005fcca25ce078d2cc29fd559379817424e94885510568bc1bc53d7d5846/pytz-2024.2-py2.py3-none-any.whl
+  #       sha256: 31c7c1817eb7fae7ca4b8c7ee50c72f93aa2dd863de768e1ef4245d426aa0725
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/a6/ab/7e5f53c3b9d14972843a647d8d7a853969a58aecc7559cb3267302c94774/tzdata-2024.2-py2.py3-none-any.whl
+  #       sha256: a48093786cdcde33cad18c2555e8532f34422074448fbc874186f0abd79565cd
+  # - name: python3-protobuf
+  #   buildsystem: simple
+  #   build-commands:
+  #     - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+  #       --prefix=${FLATPAK_DEST} "protobuf<5.27,>=5.26.1" --no-build-isolation
+  #   sources:
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/d2/e5/7e22ca7201a6b1040aae7787d0fe6cd970311da376a86fdafa5182be1d1b/protobuf-5.26.1.tar.gz
+  #       sha256: 8ca2a1d97c290ec7b16e4e5dff2e5ae150cc1582f55b5ab300d45cb0dfa90e51
+  # - name: python3-immutabledict
+  #   buildsystem: simple
+  #   build-commands:
+  #     - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+  #       --prefix=${FLATPAK_DEST} "immutabledict>=3.0.0" --no-build-isolation
+  #   sources:
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/e2/13/3cf4ac5b3403f3456e645c4533883ef67b1bb0c72e56b79c707715f57a74/immutabledict-4.2.0-py3-none-any.whl
+  #       sha256: d728b2c2410d698d95e6200237feb50a695584d20289ad3379a439aa3d90baba
+  # - name: ortool
+  #   buildsystem: simple
+  #   build-commands:
+  #     - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+  #       --prefix=${FLATPAK_DEST} ortools
+  #       --no-build-isolation
+  #   sources:
+  #     - type: file
+  #       url: https://files.pythonhosted.org/packages/62/d9/b3b2dd01c6fa1d0034463b1ae49c4f4f10fe3e5c67f8a1c8147fd49efa4a/ortools-9.11.4210-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+  #       sha256: bd2c0b319f4c0999360ab45a85d5764838c9dd0fd33437d12e32b2c07cbe04e4
+  #       x-checker-data:
+  #         type: pypi
+  #         packagetype: bdist_wheel
+  #         name: attrdict3
+  # - name: minizip
+  #   subdir: contrib/minizip
+  #   sources:
+  #     - type: archive
+  #       url: https://zlib.net/zlib-1.3.1.tar.gz
+  #       sha256: 9a93b2b7dfdac77ceba5a558a580e74667dd6fede4585b91eefb60f03b72df23
+  #       x-checker-data:
+  #         type: anitya
+  #         project-id: 5303
+  #         url-template: https://zlib.net/zlib-$version.tar.gz
+
+  #     - type: script
+  #       dest: contrib/minizip/
+  #       dest-filename: autogen.sh
+  #       commands:
+  #         - autoreconf -ifv
+  - name: abseil-cpp
+    buildsystem: cmake-ninja
+    config-opts:
+      # Use and propagate CMake C++ standard meta features
+      - -DABSL_PROPAGATE_CXX_STD=1
+      - -DABSL_OPTION_USE_STD_STRING_VIEW=1
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DABSL_OPTION_USE_STD_STRING_VIEW=0
+      - -DABSL_ENABLE_INSTALL=ON
+    sources:
+      - type: archive
+        url: https://github.com/abseil/abseil-cpp/releases/download/20240116.2/abseil-cpp-20240116.2.tar.gz
+        sha256: 733726b8c3a6d39a4120d7e45ea8b41a434cdacde401cba500f14236c49b39dc
+  - name: protobuf
+    buildsystem: cmake-ninja
+    config-opts:
+      # Disable tests and use our external Abseil build
+      - -Dprotobuf_BUILD_TESTS=off
+      - -Dprotobuf_ABSL_PROVIDER=package
+      - -Dprotobuf_BUILD_LIBPROTOC=ON
+      - -DABSL_OPTION_USE_STD_STRING_VIEW=1
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/protocolbuffers/protobuf/archive/refs/tags/v28.3.tar.gz
+        sha256: 7c3ebd7aaedd86fa5dc479a0fda803f602caaf78d8aff7ce83b89e1b8ae7442a
+  - name: coinutils
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/Mizux/CoinUtils.git
+        commit: cmake/2.11.6
+  - name: tbb
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/oneapi-src/oneTBB.git
+        commit: v2022.0.0
+  - name: soplex
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/scipopt/soplex.git
+        commit: release-711
+  - name: papilo
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/scipopt/papilo.git
+        commit: v2.3.1
+  - name: zimpl
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/scipopt/zimpl.git
+        commit: v362
+  # - name: lapack
+  #   buildsystem: cmake
+  #   builddir: true
+  #   sources:
+  #     - type: archive
+  #       url: https://github.com/Reference-LAPACK/lapack/archive/refs/tags/v3.12.0.tar.gz
+  #       sha256: eac9570f8e0ad6f30ce4b963f4f033f0f643e7c3912fc9ee6cd99120675ad48b
+  # - name: check
+  #   buildsystem: simple
+  #   build-commands:
+  #     - find /app -name **
+  # - name: ipopt
+  #   buildsystem: autotools
+  #   sources:
+  #     - type: git
+  #       url: https://github.com/coin-or/Ipopt.git
+  #       commit: stable/3.14
+  # - name: scip
+  #   buildsystem: cmake-ninja
+  #   sources:
+  #     - type: git
+  #       url: https://github.com/scipopt/scip.git
+  #       commit: v900
+  # - name: scipopt
+  #   buildsystem: cmake-ninja
+  #   sources:
+  #     - type: archive
+  #       url: https://scipopt.org/download/release/scipoptsuite-9.1.1.tgz
+  #       sha256: 331d9f30367add81518d95d353085dd051f3caf80f167548f8dd62d2ed959a6c
+  - name: osi
+    buildsystem: cmake-ninja
+    sources:
+      - type: git
+        url: https://github.com/Mizux/CoinUtils.git
+        commit: cmake/2.11.6
+  - name: highs
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: git
+        url: https://github.com/ERGO-Code/HiGHS.git
+        commit: v1.7.2
+  - name: re2
+    buildsystem: cmake-ninja
+    builddir: true
+    sources:
+      - type: archive
+        url: https://github.com/google/re2/archive/refs/tags/2023-06-01.tar.gz
+        sha256: 8b4a8175da7205df2ad02e405a950a02eaa3e3e0840947cd598e92dca453199b
+  - name: ortools
+    buildsystem: cmake
+    config-opts:
+      - -DBUILD_EXAMPLES=OFF
+      - -DBUILD_SAMPLES=OFF
+      - -DBUILD_TESTING=OFF
+      - -DUSE_COINOR=OFF
+      - -DUSE_HIGHS=ON
+      - -DUSE_SCIP=OFF
+      - -DBUILD_SHARED_LIBS=OFF
+      # - -DBUILD_ZLIB=OFF
+      # - -DBUILD_absl=ON
+      # - -DBUILD_Protobuf=ON
+      # - -DBUILD_CoinUtils=ON
+      # - -DBUILD_Osi=ON
+      # - -DBUILD_Clp=ON
+      # - -DBUILD_Cgl=ON
+      # - -DBUILD_Cbc=ON
+      # - -DBUILD_HIGHS=ON
+      # - -DBUILD_SCIP=ON
+    sources:
+      - type: git
+        url: https://github.com/google/or-tools.git
+        commit: ed94162b910fa58896db99191378d3b71a5313af

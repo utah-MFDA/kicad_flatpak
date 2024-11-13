@@ -1,0 +1,11 @@
+name: cudd
+# buildsystem: autotools
+buildsystem: simple
+build-commands:
+  - autoreconf
+  - ./configure --prefix=/app
+  - make -j $FLATPAK_BUILDER_N_JOBS install
+sources:
+  - type: git
+    url: https://github.com/The-OpenROAD-Project/cudd.git
+    commit: d47718fedea39fa2ef7d4907432b92b032a8ff72

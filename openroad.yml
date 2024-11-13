@@ -1,0 +1,22 @@
+name: openroad
+modules:
+# - boost.yml
+  - fmt.yml
+  - spdlog.yml
+#  - eigen.yml
+  - lemon.yml
+  - ortools.yml
+  - cudd.yml
+#  - tcl.yml
+#  - swig.yml
+  - name: openroad_bin
+    buildsystem: cmake
+    config-opts:
+      - -DENABLE_TESTS=0
+      - -DBUILD_GUI=OFF
+    sources:
+      - type: dir
+        path: /home/snelgrov/nas/OpenROAD
+      # - type: git
+      # url: https://github.com/The-OpenROAD-Project/OpenROAD/
+      # commit: f8280f5bfe0e945d0973cf8fa7c995ded3490da6

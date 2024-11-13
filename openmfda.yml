@@ -1,0 +1,7 @@
+name: openmfda
+buildsystem: simple
+sources:
+  - type: git
+    url: https://github.com/utah-MFDA/openmfda_flow.git
+    commit: b8232057d9c83418dd7b68a99a21d43622e6961a
+    dest: '/app/opt/openmfda'

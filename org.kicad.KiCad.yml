@@ -1,15 +1,19 @@
 app-id: org.kicad.KiCad
-runtime: org.freedesktop.Sdk
-runtime-version: '23.08'
-sdk: org.freedesktop.Sdk
+runtime: org.kde.Platform
+runtime-version: 5.15-23.08
+sdk: org.kde.Sdk
 command: kicad-startup
 finish-args:
   - --device=dri
+  - --env=SPNAV_SOCKET=/run/spnav.sock
   - --filesystem=home
+  - --filesystem=host
+  - --filesystem=/run/spnav.sock:ro
   - --share=ipc
   - --share=network
+  - --socket=pulseaudio
+  - --socket=wayland
   - --socket=x11
-  - --filesystem=host
 add-extensions:
   org.kicad.KiCad.Library:
     version: stable
@@ -35,6 +39,11 @@ cleanup:
   - /share/aclocal
   - /share/bakefile
   - '*.la'
+  - '*.a'
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
   - '*.a'
 
 modules:
@@ -103,24 +112,16 @@ modules:
           tag-pattern: ^V([\d_]+)$
           versions:
             <: '7_8_0'
-
   - name: boost
     buildsystem: simple
     build-commands:
-      - ./bootstrap.sh --prefix=/app --with-libraries=context,date_time,filesystem,iostreams,locale,program_options,regex,system,thread,test
-      - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
-    cleanup:
-      - /include
+      - ./bootstrap.sh --prefix=/app --with-libraries=context,date_time,filesystem,iostreams,locale,program_options,regex,system,thread,test,serialization
+
+      - ./b2 -j $FLATPAK_BUILDER_N_JOBS install --prefix=/app
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.85.0/source/boost_1_85_0.tar.gz
-        sha256: be0d91732d5b0cc6fbb275c7939974457e79b54d6f07ce2e3dfdd68bef883b0b
-        x-checker-data:
-          type: html
-          url: https://www.boost.org/users/download/
-          version-pattern: Version (\d+\.?\d+\.\d+)(?!\sbeta)|</a>$
-          url-template: https://boostorg.jfrog.io/artifactory/main/release/$version/source/boost_${version0}_${version1}_${version2}.tar.gz
-
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.bz2
+        sha256: a6e1ab9b0860e6a2881dd7b21fe9f737a095e5f33a3a874afc6a345228597ee6
   - name: wxWidgets
     cleanup:
       - /bin
@@ -137,10 +138,9 @@ modules:
           is-important: true
           type: git
           tag-pattern: ^v([\d\.]+)$
-
   - python3-wxPython.yml
   - python3-requests.yml
-
+  - tcl.yml
   - name: swig
     buildsystem: autotools
     cleanup:
@@ -155,7 +155,6 @@ modules:
           url: https://www.swig.org/download.html
           version-pattern: The latest release is <a href=".+">swig-([\d\.]+)</a>
           url-template: https://sourceforge.net/projects/swig/files/swig/swig-$version/swig-$version.tar.gz
-
   - name: ngspice
     cleanup:
       - /bin
@@ -217,9 +216,7 @@ modules:
           tag-pattern: ^(v[\d\.]+)$
           versions:
             <: v1.8.0
-
   - python3-pytest.yml
-
   - name: kicad
     builddir: true
     buildsystem: cmake-ninja
@@ -343,4 +340,6 @@ modules:
           - exec /app/bin/pcbnew "$@"
 
   - kicad-doc.yml
-  - python3-opendbpy.yml
+  - yosys.yml
+  - openscad.yml
+  - openroad.yml
