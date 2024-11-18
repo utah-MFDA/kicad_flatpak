@@ -15,8 +15,6 @@ modules:
       - -DENABLE_TESTS=0
       - -DBUILD_GUI=OFF
     sources:
-      - type: dir
-        path: /home/snelgrov/nas/OpenROAD
-      # - type: git
-      # url: https://github.com/The-OpenROAD-Project/OpenROAD/
-      # commit: f8280f5bfe0e945d0973cf8fa7c995ded3490da6
+      - type: git
+        url: https://github.com/lnis-uofu/OpenROAD/
+        commit: 0921a177c77d498e2674725c77b31f5280549fb8
