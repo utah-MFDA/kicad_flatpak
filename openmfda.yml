@@ -3,5 +3,7 @@ buildsystem: simple
 sources:
   - type: git
     url: https://github.com/utah-MFDA/openmfda_flow.git
-    commit: b8232057d9c83418dd7b68a99a21d43622e6961a
-    dest: '/app/opt/openmfda'
+    commit: 7bc21b0c1b3c687eb7f9ee955000483018862f29
+build-commands:
+  - mkdir -p /app/opt/openmfda
+  - cp -r . /app/opt/openmfda/
