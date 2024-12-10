@@ -343,3 +343,5 @@ modules:
   - yosys.yml
   - openscad.yml
   - openroad.yml
+  - de.klayout.KLayout.yaml
+  - python3-opendbpy.yml

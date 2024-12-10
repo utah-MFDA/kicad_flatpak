@@ -18,8 +18,3 @@ modules:
       - type: git
         url: https://github.com/lnis-uofu/OpenROAD/
         commit: ecb7730964f58487ae908f2122611ac35cf78248
-  - name: klayout
-    sources:
-      - type: archive
-        url: https://www.klayout.org/downloads/source/klayout-0.29.8.tar.gz
-        sha256: 050618ec030354948a0426ebee2acb52b4b5336326ed0ddcc9a27c8c4e492c53

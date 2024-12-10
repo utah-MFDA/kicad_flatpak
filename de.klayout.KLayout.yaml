@@ -1,0 +1,101 @@
+# app-id: de.klayout.KLayout
+# runtime: org.kde.Platform
+# runtime-version: 5.15-23.08
+# sdk: org.kde.Sdk
+# command: klayout
+# finish-args:
+#   - --share=ipc
+#   - --share=network
+#   - --socket=x11
+#   - --socket=wayland
+#   - --filesystem=host
+#   - --device=dri
+name: klayout_bin
+modules:
+  - name: gdbm
+    config-opts:
+      - --enable-libgdbm-compat
+    sources:
+      - type: archive
+        url: https://ftp.gnu.org/gnu/gdbm/gdbm-1.24.tar.gz
+        sha256: 695e9827fdf763513f133910bc7e6cfdb9187943a4fec943e57449723d2b8dbf
+        x-checker-data:
+          type: html
+          url: https://www.gnu.org.ua/software/gdbm/download.html
+          version-pattern: gdbm-([\d\.]+).tar.gz
+          url-template: https://ftp.gnu.org/gnu/gdbm/gdbm-$version.tar.gz
+  - name: libyaml
+    sources:
+      - type: archive
+        url: http://pyyaml.org/download/libyaml/yaml-0.2.5.tar.gz
+        sha256: c642ae9b75fee120b2d96c712538bd2cf283228d2337df2cf2988e3c02678ef4
+        x-checker-data:
+          type: html
+          url: https://pyyaml.org/wiki/LibYAML
+          pattern: (http://pyyaml.org/download/libyaml/yaml-([\d\.]+)\.tar\.gz)
+  - name: libssh2
+    sources:
+      - type: archive
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          - -DCMAKE_INSTALL_LIBDIR:PATH=/app/lib
+          - -DBUILD_SHARED_LIBS:BOOL=ON
+        cleanup:
+          - /share/doc
+        url: https://www.libssh2.org/download/libssh2-1.11.1.tar.gz
+        sha256: d9ec76cbe34db98eec3539fe2c899d26b0c837cb3eb466a56b0f109cabf658f7
+        x-checker-data:
+          type: anitya
+          project-id: 1730
+          url-template: https://www.libssh2.org/download/libssh2-$version.tar.gz
+  # - name: libgit2
+  #   buildsystem: cmake-ninja
+  #   config-opts:
+  #     - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+  #     - -DBUILD_SHARED_LIBS:BOOL=ON
+  #     - -DBUILD_TESTS:BOOL=OFF
+  #     - -DUSE_SSH:BOOL=ON
+  #     - -DUSE_THREADS:BOOL=ON
+    # sources:
+    #   - type: archive
+    #     url: https://github.com/libgit2/libgit2/archive/v1.8.4/libgit2-1.8.4.tar.gz
+    #     sha256: 49d0fc50ab931816f6bfc1ac68f8d74b760450eebdb5374e803ee36550f26774
+    #     x-checker-data:
+    #       type: anitya
+    #       project-id: 1627
+    #       url-template: https://github.com/libgit2/libgit2/archive/v$version/libgit2-$version.tar.gz
+  - name: ruby
+    config-opts:
+      - --enable-shared
+    sources:
+      - type: archive
+        url: https://cache.ruby-lang.org/pub/ruby/3.3/ruby-3.3.6.tar.gz
+        sha256: 8dc48fffaf270f86f1019053f28e51e4da4cce32a36760a0603a9aee67d7fd8d
+        x-checker-data:
+          type: html
+          url: https://www.ruby-lang.org/en/downloads/
+          pattern: (https://cache.ruby-lang.org/pub/ruby/[\d\.]+/ruby-([\d\.]+)\.tar\.gz)
+  - name: klayout
+    buildsystem: simple
+    build-options:
+      env:
+        LIBRARY_PATH: /app/lib
+    build-commands:
+      - bash ./build.sh -bin ${FLATPAK_DEST}/bin -j$FLATPAK_BUILDER_N_JOBS
+    # post-install:
+    #   - install -Dm644 de.klayout.KLayout.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+    #   - install -Dm644 etc/klayout.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+    #   - install -Dm644 etc/logo.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+    #   - desktop-file-edit --set-icon=${FLATPAK_ID} /app/share/applications/${FLATPAK_ID}.desktop
+    sources:
+      - type: archive
+        url: https://www.klayout.org/downloads/source/klayout-0.29.10.tar.gz
+        sha256: 7d5aea16a3e3b4928e79bc29154a0f70afca104bdc85be99aa3f6f9a52b851a8
+        x-checker-data:
+          type: html
+          url: https://www.klayout.de/build.html
+          version-pattern: klayout-([\d\.]+).tar.gz
+          url-template: https://www.klayout.org/downloads/source/klayout-$version.tar.gz
+      - type: file
+        path: de.klayout.KLayout.metainfo.xml

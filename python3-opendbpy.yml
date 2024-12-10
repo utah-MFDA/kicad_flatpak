@@ -4,14 +4,16 @@ build-commands: []
 modules:
   - name: python3-opendb
     buildsystem: cmake
-    # no-make-install: true
+    no-make-install: true
+    builddir: true
     sources:
-      - type: dir
-        path: /home/snelgrov/nas/flatpak/OpenDb
+      - type: git
+        url: https://github.com/utah-MFDA/OpenDb_standalone.git
+        commit: 471bdd41e05dac66f8ce312b09710f7cd87777bc
     post-install:
       - mkdir -p /app/lib/python3.11/site-packages
-      - cp build/src/swig/python/opendbpy.py  /app/lib/python3.11/site-packages
-      - cp build/src/swig/python/_opendbpy.so  /app/lib/python3.11/site-packages
+      - cp src/swig/python/opendbpy.py  /app/lib/python3.11/site-packages
+      - cp src/swig/python/_opendbpy.so  /app/lib/python3.11/site-packages
       # - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}/build/src/swig/python"
       #   --prefix=${FLATPAK_DEST} opendbpy --no-build-isolation
   - name: python3-kiutils
