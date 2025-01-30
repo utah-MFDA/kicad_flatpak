@@ -17,4 +17,4 @@ modules:
     sources:
       - type: git
         url: https://github.com/lnis-uofu/OpenROAD/
-        commit: 0921a177c77d498e2674725c77b31f5280549fb8
+        commit: ecb7730964f58487ae908f2122611ac35cf78248

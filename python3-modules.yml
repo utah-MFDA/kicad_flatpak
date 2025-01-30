@@ -1,0 +1,19 @@
+name: python3-modules
+buildsystem: simple
+build-commands: []
+modules:
+  - name: python3-numpy
+    buildsystem: simple
+    build-commands:
+      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+        --prefix=${FLATPAK_DEST} "numpy" --no-build-isolation
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/a9/75/10dd1f8116a8b796cb2c737b674e02d02e80454bda953fa7e65d8c12b016/numpy-2.0.2.tar.gz
+        sha256: 883c987dee1880e2a864ab0dc9892292582510604156762362d9326444636e78
+  - name: python3-pandas
+    buildsystem: simple
+    build-commands:
+      - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+        --prefix=${FLATPAK_DEST} "pandas" --no-build-isolation
+    sources:

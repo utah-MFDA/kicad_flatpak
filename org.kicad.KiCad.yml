@@ -1,4 +1,4 @@
-app-id: org.kicad.KiCad
+app-id: org.openmfda.kicad.KiCad
 runtime: org.kde.Platform
 runtime-version: 5.15-23.08
 sdk: org.kde.Sdk
@@ -14,23 +14,6 @@ finish-args:
   - --socket=pulseaudio
   - --socket=wayland
   - --socket=x11
-add-extensions:
-  org.kicad.KiCad.Library:
-    version: stable
-    directory: extensions/Library
-    autodelete: true
-    no-autodownload: false
-    subdirectories: true
-    merge-dirs: template;symbols;footprints;3dmodels
-  org.kicad.KiCad.ODBCDriver:
-    version: stable
-    directory: extensions/ODBCDriver
-    autodelete: true
-    no-autodownload: true
-    subdirectories: true
-    add-ld-path: lib
-    merge-dirs: lib;template
-
 cleanup:
   - /lib/cmake
   - /lib/pkgconfig
@@ -120,8 +103,8 @@ modules:
       - ./b2 -j $FLATPAK_BUILDER_N_JOBS install --prefix=/app
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.bz2
-        sha256: a6e1ab9b0860e6a2881dd7b21fe9f737a095e5f33a3a874afc6a345228597ee6
+        url: https://archives.boost.io/release/1.82.0/source/boost_1_82_0.tar.gz
+        sha256: 66a469b6e608a51f8347236f4912e27dc5c60c60d7d53ae9bfe4683316c6f04c
   - name: wxWidgets
     cleanup:
       - /bin
@@ -170,7 +153,7 @@ modules:
     rm-configure: true
     sources:
       - type: archive
-        url: https://downloads.sourceforge.net/project/ngspice/ng-spice-rework/42/ngspice-42.tar.gz
+        url: https://sourceforge.net/projects/ngspice/files/ng-spice-rework/old-releases/42/ngspice-42.tar.gz
         sha256: 737fe3846ab2333a250dfadf1ed6ebe1860af1d8a5ff5e7803c772cc4256e50a
         x-checker-data:
           is-important: true
@@ -245,13 +228,13 @@ modules:
       - >
         for f in $FLATPAK_DEST/share/applications/*.desktop; do
           desktop_name="$(basename $f)";
-          if [ "$desktop_name" = "org.kicad.KiCad.desktop" ]; then
+          if [ "$desktop_name" =~ \.KiCad\.desktop$ ]; then
             desktop-file-edit \
               --set-key=Exec \
               --set-value="kicad-startup %f" \
               "$f";
           else
-            if [[ "$desktop_name" =~ ^org\.kicad\.KiCad\.(eeschema|pcbnew)\.desktop$
+            if [[ "$desktop_name" =~ \.KiCad\.(eeschema|pcbnew)\.desktop$
         ]]; then
               desktop-file-edit \
                 --set-key=Exec \
@@ -262,7 +245,7 @@ modules:
         done;
         unset desktop_name
       # TODO (post-install script): Re-add <kudos> tag to metainfo.xml for UserDocs.
-    run-tests: true
+    run-tests: false
     subdir: kicad-git
     sources:
       - type: git
@@ -338,8 +321,17 @@ modules:
               odbcinst -i -d -f "$template" >/dev/null;
             done
           - exec /app/bin/pcbnew "$@"
+      - type: patch
+        use-git: true
+        dest: kicad-git
+        paths:
+          - kicad-branding.patch
 
   - kicad-doc.yml
   - yosys.yml
   - openscad.yml
   - openroad.yml
+  - de.klayout.KLayout.yaml
+  - python3-opendbpy.yml
+  - openmfda.yml
+  - python3-solid.yml
