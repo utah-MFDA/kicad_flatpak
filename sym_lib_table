@@ -1,0 +1,5 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "mfda")(type "KiCad")(uri "/app/opt/openmfda/flow/platforms/h.r.3.3/kicad/mfda.kicad_sym")(options "")(descr ""))
+  (lib (name "mfda_spice")(type "KiCad")(uri "/app/opt/openmfda/flow/platforms/h.r.3.3/kicad/mfda_spice.kicad_sym")(options "")(descr ""))
+)

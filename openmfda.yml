@@ -2,8 +2,20 @@ name: openmfda
 buildsystem: simple
 sources:
   - type: git
+    dest: openmfda
     url: https://github.com/utah-MFDA/openmfda_flow.git
     commit: 7bc21b0c1b3c687eb7f9ee955000483018862f29
+  - type: file
+    path: fp_lib_table
+  - type: file
+    path: sym_lib_table
+  - type: dir
+    path: h.r.3.3-template
+    dest: h.r.3.3-template
 build-commands:
-  - mkdir -p /app/opt/openmfda
-  - cp -r . /app/opt/openmfda/
+  - mkdir -p /app/opt
+  - cp -r openmfda /app/opt/openmfda
+  - mkdir -p /app/extensions/Library/template
+  - cp fp_lib_table /app/extensions/Library/template/fp_lib_table
+  - cp sym_lib_table /app/extensions/Library/template/sym_lib_table
+  - cp -r h.r.3.3-template /app/extensions/Library/template/h.r.3.3
