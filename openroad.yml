@@ -12,9 +12,10 @@ modules:
   - name: openroad_bin
     buildsystem: cmake
     config-opts:
-      - -DENABLE_TESTS=0
+      - -DENABLE_TESTS=OFF
       - -DBUILD_GUI=OFF
+      - -DABC_SKIP_TESTS=ON
     sources:
       - type: git
         url: https://github.com/lnis-uofu/OpenROAD/
-        commit: ecb7730964f58487ae908f2122611ac35cf78248
+        commit: 3d1904b03d4954794a814d0a0b9fdf7bfe00f1bb
